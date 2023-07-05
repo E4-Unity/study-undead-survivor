@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7eb8ee87c29e3c348a9d9434f3f35e1f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7a64a524b2a48ac49aa843600271e6c5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e88a1a7927d596c43b96f1e4a6c89799, type: 2}
+  m_Motion: {fileID: 7400000, guid: 220861fd3c158a2489fc0e97f75e2ca3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -74,7 +74,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e56af6bfb137117488746317c8cb2a0f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 316b4b649d85e8a48950c3111e19e210, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -86,7 +86,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_Farmer_00
+  m_Name: AC_Farmer
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Dead
@@ -203,7 +203,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 0
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -842011574629160118}
   m_Solo: 0
