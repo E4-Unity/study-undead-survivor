@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     // 버퍼
     Vector2 m_InputValue;
     
+    /* 프로퍼티 */
+    public Vector2 InputValue => m_InputValue;
+    
     /* Input System */
     void OnMove(InputValue _inputValue)
     {
