@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -13,17 +15,17 @@ public class Player : MonoBehaviour
     
     // 버퍼
     Vector2 m_InputValue;
+    
+    /* Input System */
+    void OnMove(InputValue _inputValue)
+    {
+        m_InputValue = _inputValue.Get<Vector2>();
+    }
 
+    /* MonoBehaviour */
     void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
-    }
-    
-    void Update()
-    {
-        // 사용자 입력
-        m_InputValue.x = Input.GetAxisRaw("Horizontal");
-        m_InputValue.y = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
