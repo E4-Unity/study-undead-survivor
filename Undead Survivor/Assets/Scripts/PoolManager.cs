@@ -55,17 +55,16 @@ public class PoolInstance
     
     GameObject OnCreate()
     {
-        bool previousState = m_Prefab.activeSelf;
-        m_Prefab.SetActive(false);
         GameObject instance = UnityEngine.Object.Instantiate(m_Prefab);
-        m_Prefab.SetActive(previousState);
+        instance.SetActive(false);
         
         return instance;
     }
 
     void OnGet(GameObject _instance)
     {
-        _instance.SetActive(true);
+        //_instance.SetActive(true);
+        // 선택 옵션으로 바꿀 예정
     }
     
     void OnRelease(GameObject _instance)

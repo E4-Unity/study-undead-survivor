@@ -1,17 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
+    // 에디터 설정
     [SerializeField] GameObject[] m_Prefabs;
+    [SerializeField] Enemy.SpawnData[] m_SpawnDataList;
     
+    // 할당
     Transform[] m_SpawnPoints;
     IObjectPool<GameObject>[] m_Pools;
-    float m_Timer;
+    
+    // 버퍼
+    float timer;
+    int level;
 
     void Awake()
     {
@@ -29,19 +36,21 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        m_Timer += Time.deltaTime;
+        timer += Time.deltaTime;
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.Get().GetPlayTime() / 10f), m_SpawnDataList.Length - 1);
 
-        if (m_Timer > 0.2f)
+        if (timer > m_SpawnDataList[level].SpawnTime)
         {
             Spawn();
-            m_Timer = 0;
+            timer = 0;
         }
     }
 
     void Spawn()
     {
-        GameObject enemy = m_Pools[Random.Range(0, m_Prefabs.Length)].Get();
-        // SetActive(true) 이후에 위치 변경인데, 그 전에 하는 방법은?
+        GameObject enemy = m_Pools[0].Get(); // 나중에 prefab 기준으로 변경
         enemy.transform.position = m_SpawnPoints[Random.Range(1, m_SpawnPoints.Length)].position;
+        enemy.GetComponent<Enemy>().Init(m_SpawnDataList[level]);
+        enemy.SetActive(true);
     }
 }
