@@ -17,12 +17,12 @@ public class Reposition : MonoBehaviour
     {
         if (!_other.CompareTag("Area")) return;
 
-        Vector3 playerPos = GameManager.Instance.GetPlayer().transform.position;
+        Vector3 playerPos = GameManager.Get().GetPlayer().transform.position;
         Vector3 myPos = transform.position;
         float diffX = Mathf.Abs(playerPos.x - myPos.x);
         float diffY = Mathf.Abs(playerPos.y - myPos.y);
 
-        Vector3 playerDir = GameManager.Instance.GetPlayer().InputValue;
+        Vector3 playerDir = GameManager.Get().GetPlayer().InputValue;
         float dirX = playerDir.x < 0 ? -1 : 1;
         float dirY = playerDir.y < 0 ? -1 : 1;
 

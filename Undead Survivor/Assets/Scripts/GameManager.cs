@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-    
     [SerializeField] Player m_Player;
+    [SerializeField] PoolManager m_PoolManager;
+    
+    static GameManager Instance;
+    public static GameManager Get() => Instance;
     public Player GetPlayer() => m_Player;
+    public PoolManager GetPoolManager() => m_PoolManager;
     
     void Awake()
     {

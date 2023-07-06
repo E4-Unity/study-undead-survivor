@@ -42,4 +42,9 @@ public class Enemy : MonoBehaviour
     {
         m_SpriteRenderer.flipX = dir.x < 0;
     }
+
+    void OnEnable()
+    {
+        m_Target = GameManager.Get().GetPlayer().GetComponent<Rigidbody2D>();
+    }
 }
