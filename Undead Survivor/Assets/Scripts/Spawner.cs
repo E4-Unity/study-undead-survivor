@@ -1,21 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
     // 에디터 설정
-    [SerializeField] GameObject[] m_Prefabs;
-    [SerializeField] Enemy.SpawnData[] m_SpawnDataList;
-    
+    [SerializeField] LevelConfig[] m_LevelConfig;
+
     // 할당
     Transform[] m_SpawnPoints;
-    IObjectPool<GameObject>[] m_Pools;
-    
+
     // 버퍼
     float timer;
     int level;
@@ -23,34 +19,57 @@ public class Spawner : MonoBehaviour
     void Awake()
     {
         m_SpawnPoints = GetComponentsInChildren<Transform>();
-        m_Pools = new IObjectPool<GameObject>[m_Prefabs.Length];
-    }
-
-    void Start()
-    {
-        for (int i = 0; i < m_Prefabs.Length; i++)
-        {
-            m_Pools[i] = GameManager.Get().GetPoolManager().GetPool(m_Prefabs[i]);
-        }
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        level = Mathf.Min(Mathf.FloorToInt(GameManager.Get().GetPlayTime() / 10f), m_SpawnDataList.Length - 1);
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.Get().GetPlayTime() / 10f), m_LevelConfig.Length - 1);
 
-        if (timer > m_SpawnDataList[level].SpawnTime)
+        if (timer > m_LevelConfig[level].SpawnTime)
         {
-            Spawn();
+            foreach (var item in m_LevelConfig[level].EnemyConfig)
+            {
+                Spawn(item);
+            }
             timer = 0;
         }
     }
 
-    void Spawn()
+    void Spawn(SpawnData _spawnData)
     {
-        GameObject enemy = m_Pools[0].Get(); // 나중에 prefab 기준으로 변경
+        GameObject enemy = GameManager.Get().GetPoolManager().GetPool(_spawnData.Prefab).Get(); // 나중에 캐싱
         enemy.transform.position = m_SpawnPoints[Random.Range(1, m_SpawnPoints.Length)].position;
-        enemy.GetComponent<Enemy>().Init(m_SpawnDataList[level]);
+        enemy.GetComponent<Enemy>().Init(_spawnData);
         enemy.SetActive(true);
     }
+    
+    [Serializable]
+    class LevelConfig
+    {
+        [SerializeField] float m_SpawnTime;
+        public float SpawnTime => m_SpawnTime;
+
+        [SerializeField] int m_MaxSpawnCount;
+        public int MaxSpawnCount => m_MaxSpawnCount;
+
+        [SerializeField] SpawnData[] m_EnemyConfig;
+        public SpawnData[] EnemyConfig => m_EnemyConfig;
+    }
+}
+
+[Serializable]
+public class SpawnData
+{
+    [SerializeField] GameObject m_Prefab;
+    public GameObject Prefab => m_Prefab;
+    
+    [SerializeField] int m_Type;
+    public int Type => m_Type;
+
+    [SerializeField] int m_Level;
+    public int Level => m_Level;
+
+    [SerializeField] float m_Probability;
+    public float Probability => m_Probability;
 }

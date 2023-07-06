@@ -273,6 +273,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 621782570767798479, guid: 5925d066868cd48419694c2e2f9d464e, type: 3}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_EnemyConfig.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_SpawnDataList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -297,6 +305,14 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_SpawnTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[1].m_SpawnTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_SpawnDataList.Array.data[0].m_SpawnTime
       value: 0.7
       objectReference: {fileID: 0}
@@ -304,6 +320,42 @@ PrefabInstance:
       propertyPath: m_SpawnDataList.Array.data[1].m_SpawnTime
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_MaxSpawnCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[1].m_MaxSpawnCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[1].m_EnemyConfig.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.data[0].m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.data[1].m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.data[0].m_Prefab
+      value: 
+      objectReference: {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.data[1].m_Prefab
+      value: 
+      objectReference: {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[1].m_EnemyConfig.Array.data[0].m_Prefab
+      value: 
+      objectReference: {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
     - target: {fileID: 5843452604872781844, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -354,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 978012912, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
     - target: {fileID: 5843452604872781850, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_Name
-      value: Custom Player
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
