@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.U2D.Animation;
 
 public class Enemy : MonoBehaviour
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     SpriteLibrary m_SpriteLibrary;
     Animator m_Animator;
     Collider2D m_Collider;
+    SortingGroup m_SortingGroup;
     
     // 프로퍼티
     float Speed => m_EnemyData[m_Type].Speed;
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour
         m_SpriteLibrary = GetComponent<SpriteLibrary>();
         m_Animator = GetComponent<Animator>();
         m_Collider = GetComponent<Collider2D>();
+        m_SortingGroup = GetComponent<SortingGroup>();
     }
     
     void FixedUpdate()
@@ -104,10 +107,8 @@ public class Enemy : MonoBehaviour
         bIsDead = true;
         m_Animator.SetBool("Dead", bIsDead);
         m_Collider.enabled = false;
-
-        // TODO 나중에 그림자는 지우거나 위치 조정이 필요해 보임
-        foreach(var spriteRenderer in GetComponentsInChildren<SpriteRenderer>())
-            spriteRenderer.sortingLayerName = "Dead";
+        
+        m_SortingGroup.sortingLayerName = "Dead";
     }
 
     void Revive()
@@ -116,8 +117,7 @@ public class Enemy : MonoBehaviour
         //m_Animator.SetBool("Dead", bIsDead);
         m_Collider.enabled = true;
         
-        foreach(var spriteRenderer in GetComponentsInChildren<SpriteRenderer>())
-            spriteRenderer.sortingLayerName = "Enemy";
+        m_SortingGroup.sortingLayerName = "Enemy";
 
         m_Health = MaxHealth;
     }

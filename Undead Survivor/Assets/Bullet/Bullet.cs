@@ -1,18 +1,59 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] int m_Damage;
-    [SerializeField] int m_Penetration;
+    // 에디터 할당
+    [SerializeField] int m_Damage = 10;
+    [SerializeField] int m_Penetration = -1;
 
+    // 프로퍼티
     public int Damage => m_Damage;
 
-    public void Init(int _damage, int _penetration)
+    // 컴포넌트
+    Rigidbody2D m_Rigidbody;
+    
+    // 상태
+    Vector3 m_Velocity;
+
+    void Awake()
+    {
+        m_Rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    void OnEnable()
+    {
+        if (m_Penetration == -1) return;
+        m_Rigidbody.velocity = m_Velocity;
+    }
+
+    void OnTriggerEnter2D(Collider2D _other)
+    {
+        // 원거리 무기
+        if (!_other.CompareTag("Enemy") || m_Penetration == -1) return;
+        
+        // 관통 계산
+        m_Penetration--;
+
+        if (m_Penetration == -1)
+        {
+            // 어차피 Init으로 초기화할껀데 굳이?
+            // m_Rigidbody.velocity = Vector2.zero;
+            GameManager.Get().GetPoolManager().GetPool(gameObject).Release(gameObject);
+        }
+    }
+    
+    public void Init(int _damage, int _penetration, Vector3 _velocity)
     {
         m_Damage = _damage;
         m_Penetration = _penetration;
+        
+        // 원거리 무기
+        if (_penetration > -1)
+        {
+            m_Velocity = _velocity * 15;
+        }
     }
-    
 }
