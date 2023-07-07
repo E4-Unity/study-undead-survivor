@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     Animator m_Animator;
     Collider2D m_Collider;
     SortingGroup m_SortingGroup;
-    
+
     // 프로퍼티
     float Speed => m_EnemyData[m_Type].Speed;
 
@@ -47,24 +47,34 @@ public class Enemy : MonoBehaviour
     int MaxHealth => m_EnemyData[m_Type].MaxHealth;
     SpriteLibraryAsset GetSpriteLibraryAsset() => m_EnemyData[m_Type].GetSpriteLibraryAsset();
     
-    // 버퍼
+    /* 버퍼 시작 */
+    // FixedUpdate
     Vector2 position;
     Vector2 dir;
+    
+    // KnockBack
+    WaitForFixedUpdate waitForFixedUpdate;
+    Vector3 knockBackDir;
+    /* 버퍼 종료 */
     
     // MonoBehaviour
     void Awake()
     {
+        // 컴포넌트 할당
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_SpriteLibrary = GetComponent<SpriteLibrary>();
         m_Animator = GetComponent<Animator>();
         m_Collider = GetComponent<Collider2D>();
         m_SortingGroup = GetComponent<SortingGroup>();
+        
+        // 변수 할당
+        waitForFixedUpdate = new WaitForFixedUpdate();
     }
     
     void FixedUpdate()
     {
-        if (bIsDead) return;
+        if (bIsDead || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
         
         position = m_Rigidbody.position;
         dir = m_Target.position - position;
@@ -101,6 +111,14 @@ public class Enemy : MonoBehaviour
 
         Health -= _other.GetComponent<Bullet>().Damage;
         m_Animator.SetTrigger("Hit");
+        StartCoroutine(KnockBack());
+    }
+
+    IEnumerator KnockBack()
+    {
+        yield return waitForFixedUpdate;
+        knockBackDir = (transform.position - GameManager.Get().GetPlayer().transform.position).normalized;
+        m_Rigidbody.AddForce(knockBackDir * 3, ForceMode2D.Impulse);
     }
 
     void Dead()
@@ -108,18 +126,27 @@ public class Enemy : MonoBehaviour
         bIsDead = true;
         m_Animator.SetBool("Dead", bIsDead);
         m_Collider.enabled = false;
-        
+        m_Rigidbody.simulated = false;
         m_SortingGroup.sortingLayerName = "Dead";
+        
+        GameManager.Get().GetExp();
     }
 
     void Revive()
     {
+        // Dead의 반대 동작
         bIsDead = false;
-        //m_Animator.SetBool("Dead", bIsDead);
+        m_Animator.SetBool("Dead", bIsDead);
         m_Collider.enabled = true;
-        
+        m_Rigidbody.simulated = true;
         m_SortingGroup.sortingLayerName = "Enemy";
 
+        // 체력 설정
         m_Health = MaxHealth;
+    }
+
+    void Release()
+    {
+        GameManager.Get().GetPoolManager().GetPool(gameObject.GetComponent<PoolTracker>().PrefabID).Release(gameObject);
     }
 }

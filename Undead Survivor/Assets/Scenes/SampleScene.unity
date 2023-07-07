@@ -14079,6 +14079,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player: {fileID: 197275223}
   m_PoolManager: {fileID: 1285905443}
+  m_PlayTime: 0
+  m_MaxPlayTime: 20
+  m_Level: 0
+  m_Kill: 0
+  m_Exp: 0
+  m_NextExp: 03000000050000000a0000006400000096000000d20000001801000068010000c201000058020000
 --- !u!1 &1745593301
 GameObject:
   m_ObjectHideFlags: 0
