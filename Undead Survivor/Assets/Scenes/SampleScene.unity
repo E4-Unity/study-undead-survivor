@@ -225,6 +225,55 @@ Transform:
   m_Father: {fileID: 634911924}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &136068567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 136068568}
+  - component: {fileID: 136068569}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &136068568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136068567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 197275224}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &136068569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136068567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfa012ab331ca045b19c6773bd8d4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WeaponID: 0
+  m_Prefab: {fileID: 6652638951289049743, guid: dfdbc4fd1a80db24793e4ff10b7234c4, type: 3}
+  m_Damage: 5
+  m_Count: 4
+  m_Speed: 0
 --- !u!1001 &197275222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -278,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_LevelConfig.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_SpawnDataList.Array.size
@@ -310,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_LevelConfig.Array.data[1].m_SpawnTime
-      value: 0.7
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_SpawnDataList.Array.data[0].m_SpawnTime
@@ -334,14 +383,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_LevelConfig.Array.data[1].m_EnemyConfig.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
-      propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.data[0].m_Type
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.data[0].m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_LevelConfig.Array.data[0].m_EnemyConfig.Array.data[1].m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[1].m_EnemyConfig.Array.data[0].m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[1].m_EnemyConfig.Array.data[1].m_Type
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
@@ -354,6 +411,10 @@ PrefabInstance:
       objectReference: {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
     - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_LevelConfig.Array.data[1].m_EnemyConfig.Array.data[0].m_Prefab
+      value: 
+      objectReference: {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
+    - target: {fileID: 1537384014226372433, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_LevelConfig.Array.data[1].m_EnemyConfig.Array.data[1].m_Prefab
       value: 
       objectReference: {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
     - target: {fileID: 5843452604872781844, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
@@ -400,10 +461,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5843452604872781845, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 978012912, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
     - target: {fileID: 5843452604872781850, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_Name
       value: Player
@@ -828,7 +885,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000ef4a3175835eb394bf40df409b022b4d
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1100,7 +1157,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -5343,7 +5400,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -9710,7 +9767,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -13837,6 +13894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Prefabs:
   - {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
+  - {fileID: 6652638951289049743, guid: dfdbc4fd1a80db24793e4ff10b7234c4, type: 3}
 --- !u!1 &1491235038
 GameObject:
   m_ObjectHideFlags: 0
@@ -14103,7 +14161,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
