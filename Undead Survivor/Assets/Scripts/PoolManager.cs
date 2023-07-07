@@ -10,28 +10,69 @@ public class PoolManager : MonoBehaviour
     [SerializeField] GameObject[] m_Prefabs;
     
     // 상태
+    [SerializeField, ReadOnly] GameObject[] m_Instances;
     PoolInstance[] m_Pools;
+    GameObject[] m_InstanceGroups;
     
     // MonoBehaviour
     void Awake()
     {
         m_Pools = new PoolInstance[m_Prefabs.Length];
+        m_Instances = new GameObject[m_Prefabs.Length];
 
+        // 버퍼
+        GameObject instanceGroup;
+        GameObject instance;
+        PoolTracker tracker;
         for (int i = 0; i < m_Prefabs.Length; i++)
         {
-            m_Pools[i] = new PoolInstance(m_Prefabs[i]);
+            // 인스턴스들을 정리해둘 Parent 게임 오브젝트 생성
+            instanceGroup = new GameObject(m_Prefabs[i].name + " Pool");
+            instanceGroup.transform.parent = transform;
+
+            // PoolTracker를 부착한 프리팹 인스턴스 생성
+            instance = Instantiate(m_Prefabs[i], instanceGroup.transform);
+            instance.name = m_Prefabs[i].name;
+            tracker = instance.AddComponent<PoolTracker>();
+            tracker.PrefabID = i;
+            instance.SetActive(false);
+            m_Instances[i] = instance;
+
+            // Pool 생성
+            m_Pools[i] = new PoolInstance(instance, instanceGroup.transform);
         }
     }
 
     public IObjectPool<GameObject> GetPool(GameObject _prefab)
     {
-        foreach (var pool in m_Pools)
+        for (int i = 0; i < m_Prefabs.Length; i++)
         {
-            if (pool.Prefab == _prefab)
-                return pool.Get();
+            if (m_Prefabs[i] == _prefab)
+                return GetPool(i);
         }
 
         return null;
+    }
+    
+    public IObjectPool<GameObject> GetPool(int _prefabID)
+    {
+        return m_Pools.Length > _prefabID ? m_Pools[_prefabID].Get() : null;
+    }
+}
+
+// Pool Manager에서만 Add 해야함
+public class PoolTracker : MonoBehaviour
+{
+    [SerializeField, ReadOnly] int m_PrefabID = -1;
+
+    public int PrefabID
+    {
+        get => m_PrefabID;
+        set
+        {
+            if (m_PrefabID < 0)
+                m_PrefabID = value;
+        }
     }
 }
 
@@ -39,14 +80,16 @@ public class PoolInstance
 {
     readonly GameObject m_Prefab;
     readonly IObjectPool<GameObject> m_Pool;
+    readonly Transform m_InstanceGroup;
 
     public GameObject Prefab => m_Prefab;
     public IObjectPool<GameObject> Get() => m_Pool;
 
-    public PoolInstance(GameObject _prefab,  bool _collectionCheck = true, int _defaultCapacity = 10, int _maxSize = 10000)
+    public PoolInstance(GameObject _prefab, Transform _instanceGroup, bool _collectionCheck = true, int _defaultCapacity = 10, int _maxSize = 10000)
     {
         // 변수 설정
         m_Prefab = _prefab;
+        m_InstanceGroup = _instanceGroup;
 
         // 오브젝트 풀 생성
         m_Pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy, _collectionCheck, _defaultCapacity,
@@ -55,9 +98,10 @@ public class PoolInstance
     
     GameObject OnCreate()
     {
-        GameObject instance = UnityEngine.Object.Instantiate(m_Prefab);
-        instance.SetActive(false);
-        
+        GameObject instance = UnityEngine.Object.Instantiate(m_Prefab, m_InstanceGroup);
+        instance.SetActive(true);
+        instance.SetActive(false); // For Awake
+
         return instance;
     }
 
@@ -70,6 +114,7 @@ public class PoolInstance
     void OnRelease(GameObject _instance)
     {
         _instance.SetActive(false);
+        _instance.transform.parent = m_InstanceGroup;
     }
     
     void OnDestroy(GameObject _instance)

@@ -13904,6 +13904,7 @@ MonoBehaviour:
   - {fileID: 4013367322586727044, guid: f605f824291e73a409f6d0dff5386c03, type: 3}
   - {fileID: 6652638951289049743, guid: dfdbc4fd1a80db24793e4ff10b7234c4, type: 3}
   - {fileID: 7703873238374379375, guid: 5fa35598d5b0be544a80a8a8810491a8, type: 3}
+  m_Instances: []
 --- !u!1 &1491235038
 GameObject:
   m_ObjectHideFlags: 0
@@ -13982,7 +13983,7 @@ MonoBehaviour:
   m_WeaponID: 1
   m_Prefab: {fileID: 7703873238374379375, guid: 5fa35598d5b0be544a80a8a8810491a8, type: 3}
   m_Damage: 5
-  m_Count: 0
+  m_Count: 2
   m_Speed: 0
 --- !u!1 &1547034263
 GameObject:

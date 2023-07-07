@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -39,12 +40,19 @@ public class Bullet : MonoBehaviour
 
         if (m_Penetration == -1)
         {
-            // 어차피 Init으로 초기화할껀데 굳이?
-            // m_Rigidbody.velocity = Vector2.zero;
-            GameManager.Get().GetPoolManager().GetPool(gameObject).Release(gameObject);
+            if(gameObject.activeSelf)
+                GameManager.Get().GetPoolManager().GetPool(gameObject.GetComponent<PoolTracker>().PrefabID).Release(gameObject);
         }
     }
-    
+
+    void OnTriggerExit2D(Collider2D _other)
+    {
+        if (!_other.CompareTag("Area")) return;
+        
+        if(gameObject.activeSelf)
+            GameManager.Get().GetPoolManager().GetPool(gameObject.GetComponent<PoolTracker>().PrefabID).Release(gameObject);
+    }
+
     public void Init(int _damage, int _penetration, Vector3 _velocity)
     {
         m_Damage = _damage;

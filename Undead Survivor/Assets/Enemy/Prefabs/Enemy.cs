@@ -84,7 +84,8 @@ public class Enemy : MonoBehaviour
         Revive();
 
         // 목표물을 플레이어로 설정
-        m_Target = GameManager.Get().GetPlayer().GetComponent<Rigidbody2D>();
+        if(GameManager.Get())
+            m_Target = GameManager.Get().GetPlayer().GetComponent<Rigidbody2D>();
     }
 
     public void Init(SpawnData _spawnData)
