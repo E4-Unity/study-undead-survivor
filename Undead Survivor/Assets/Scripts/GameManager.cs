@@ -22,10 +22,22 @@ public class GameManager : MonoBehaviour
     
     // 플레이어 상태
     [Header("# Player State")]
+    [SerializeField] int m_MaxHealth = 100;
+    [SerializeField, ReadOnly] int m_Health;
     [SerializeField, ReadOnly] int m_Level;
     [SerializeField, ReadOnly] int m_Kill;
     [SerializeField, ReadOnly] int m_Exp;
     [SerializeField] int[] m_NextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
+    
+    // 프로퍼티
+    public int Exp => m_Exp;
+    public int NextExp => m_NextExp[m_Level];
+    public int Level => m_Level;
+    public int Kill => m_Kill;
+    public float PlayTime => m_PlayTime;
+    public float MaxPlayTime => m_MaxPlayTime;
+    public int Health => m_Health;
+    public int MaxHealth => m_MaxHealth;
 
     // Getter
     public Player GetPlayer() => m_Player;
@@ -37,6 +49,11 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this; 
+    }
+
+    void Start()
+    {
+        m_Health = m_MaxHealth;
     }
 
     void Update()
