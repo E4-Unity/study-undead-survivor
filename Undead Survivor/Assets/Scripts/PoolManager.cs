@@ -14,6 +14,9 @@ public class PoolManager : MonoBehaviour
     PoolInstance[] m_Pools;
     GameObject[] m_InstanceGroups;
     
+    // 프로퍼티
+    public GameObject[] Prefabs => m_Prefabs;
+
     // MonoBehaviour
     void Awake()
     {
@@ -57,6 +60,17 @@ public class PoolManager : MonoBehaviour
     public IObjectPool<GameObject> GetPool(int _prefabID)
     {
         return m_Pools.Length > _prefabID ? m_Pools[_prefabID].Get() : null;
+    }
+
+    public int GetPrefabID(GameObject _prefab)
+    {
+        for (int i = 0; i < m_Prefabs.Length; i++)
+        {
+            if (m_Prefabs[i] == _prefab)
+                return i;
+        }
+
+        return -1;
     }
 }
 

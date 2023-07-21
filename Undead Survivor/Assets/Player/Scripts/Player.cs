@@ -9,6 +9,15 @@ public class Player : MonoBehaviour
 {
     // 에디터 설정
     [SerializeField] float m_Speed = 3f; 
+    
+    // 프로퍼티
+    public float Speed
+    {
+        get => m_Speed;
+        set => m_Speed = value;
+    }
+
+    
 
     // 컴포넌트
     Rigidbody2D m_Rigidbody;

@@ -9,10 +9,19 @@ public class Weapon : MonoBehaviour
 {
     // 에디터 설정
     [SerializeField] int m_WeaponID;
-    [SerializeField] GameObject m_Prefab;
+    [SerializeField] int m_PrefabID;
     [SerializeField] int m_Damage;
     [SerializeField] int m_Count;
     [SerializeField] float m_Speed;
+    
+    // 프로퍼티
+    public int WeaponID => m_WeaponID;
+
+    public float Speed
+    {
+        get => m_Speed;
+        set => m_Speed = value;
+    }
 
     // 상태
     float m_Timer;
@@ -23,12 +32,7 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
-        m_Scanner = GetComponentInParent<Scanner>();
-    }
-
-    void Start()
-    {
-        Init();
+        m_Player = GameManager.Get().GetPlayer();
     }
 
     void Update()
@@ -56,10 +60,24 @@ public class Weapon : MonoBehaviour
         
         if(m_WeaponID == 0)
             Arrange();
+        
+        m_Player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void Init()
+    public void Init(ItemData _data)
     {
+        // Basic Set
+        name = "Weapon " + _data.ItemID;
+        transform.parent = m_Player.transform;
+        transform.localPosition = Vector3.zero;
+        m_Scanner = GetComponentInParent<Scanner>(); // TODO 리팩토링 필요
+        
+        // Property Set
+        m_WeaponID = _data.ItemID;
+        m_Damage = _data.BaseDamage;
+        m_Count = _data.BaseCount;
+        m_PrefabID = GameManager.Get().GetPoolManager().GetPrefabID(_data.Projectile);
+        
         switch (m_WeaponID)
         {
             case 0:
@@ -70,6 +88,8 @@ public class Weapon : MonoBehaviour
                 m_Speed = 0.3f;
                 break;
         }
+        
+        m_Player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     void Arrange()
@@ -82,7 +102,7 @@ public class Weapon : MonoBehaviour
             else
             {
                 // Bullet 스폰 및 배치
-                bullet = GameManager.Get().GetPoolManager().GetPool(m_Prefab).Get();
+                bullet = GameManager.Get().GetPoolManager().GetPool(m_PrefabID).Get();
                 bullet.transform.parent = transform;
             }
             
@@ -107,7 +127,7 @@ public class Weapon : MonoBehaviour
         if (!m_Scanner.MainTarget) return;
         
         // Bullet 스폰
-        GameObject bullet = GameManager.Get().GetPoolManager().GetPool(m_Prefab).Get();
+        GameObject bullet = GameManager.Get().GetPoolManager().GetPool(m_PrefabID).Get();
         
         // Bullet 방향 및 속도 설정
         Vector3 position = transform.position;

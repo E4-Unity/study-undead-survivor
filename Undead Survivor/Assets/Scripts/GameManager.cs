@@ -36,7 +36,12 @@ public class GameManager : MonoBehaviour
     public int Kill => m_Kill;
     public float PlayTime => m_PlayTime;
     public float MaxPlayTime => m_MaxPlayTime;
-    public int Health => m_Health;
+
+    public int Health
+    {
+        get => m_Health;
+        set => m_Health = value;
+    }
     public int MaxHealth => m_MaxHealth;
 
     // Getter
