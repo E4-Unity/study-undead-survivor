@@ -37,6 +37,9 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        // 게임 정지
+        if (GameManager.Get().IsPaused) return;
+
         switch (m_WeaponID)
         {
             case 0:

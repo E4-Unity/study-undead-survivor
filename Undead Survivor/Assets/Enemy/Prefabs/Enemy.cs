@@ -74,6 +74,9 @@ public class Enemy : MonoBehaviour
     
     void FixedUpdate()
     {
+        // 게임 정지
+        if (GameManager.Get().IsPaused) return;
+
         if (bIsDead || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
         
         position = m_Rigidbody.position;
@@ -85,6 +88,9 @@ public class Enemy : MonoBehaviour
 
     void LateUpdate()
     {
+        // 게임 정지
+        if (GameManager.Get().IsPaused) return;
+
         m_SpriteRenderer.flipX = dir.x < 0;
     }
 

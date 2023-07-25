@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     /* 필드 */
     [Header("# Game State")]
+    [SerializeField, ReadOnly] bool m_IsPaused = false;
     [SerializeField, ReadOnly] float m_PlayTime;
     [SerializeField, ReadOnly] float m_MaxPlayTime = 20f;
     
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int[] m_NextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
 
     /* 프로퍼티 */
+    public bool IsPaused => m_IsPaused;
     public float PlayTime => m_PlayTime;
     public float MaxPlayTime => m_MaxPlayTime;
     public int Health
@@ -46,6 +48,33 @@ public class GameManager : MonoBehaviour
     public int Kill => m_Kill;
     public int Exp => m_Exp;
     public int NextExp => m_NextExp[m_Level];
+
+    /* 메서드 */
+    public void PauseGame()
+    {
+        m_IsPaused = true;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        m_IsPaused = false;
+        Time.timeScale = 1;
+    }
+
+    // Player
+    public void GetExp()
+    {
+        m_Exp++;
+        m_Kill++;
+
+        if (m_Exp == m_NextExp[m_Level])
+        {
+            m_Exp = 0;
+            m_Level++;
+            m_LevelUp_UI.Show();
+        }
+    }
 
     /* MonoBehaviour */
     void Awake()
@@ -63,25 +92,14 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // 게임 정지
+        if (IsPaused) return;
+
         m_PlayTime += Time.deltaTime;
 
         if (m_PlayTime > m_MaxPlayTime)
         {
             m_PlayTime = m_MaxPlayTime;
-        }
-    }
-    
-    // Player
-    public void GetExp()
-    {
-        m_Exp++;
-        m_Kill++;
-
-        if (m_Exp == m_NextExp[m_Level])
-        {
-            m_Exp = 0;
-            m_Level++;
-            m_LevelUp_UI.Show();
         }
     }
 }

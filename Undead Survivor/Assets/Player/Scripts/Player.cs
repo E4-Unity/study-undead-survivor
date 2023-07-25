@@ -67,6 +67,9 @@ public class Player : MonoBehaviour
     /* Input System */
     void OnMove(InputValue _inputValue)
     {
+        // 게임 정지
+        if (GameManager.Get().IsPaused) return;
+
         inputValue = _inputValue.Get<Vector2>();
     }
 
@@ -85,12 +88,18 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        // 게임 정지
+        if (GameManager.Get().IsPaused) return;
+
         // 움직임
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Speed * Time.fixedDeltaTime * inputValue.normalized);
     }
 
     void LateUpdate()
     {
+        // 게임 정지
+        if (GameManager.Get().IsPaused) return;
+
         // 애니메이션 변수 업데이트
         m_Animator.SetFloat("Speed", inputValue.magnitude);
         

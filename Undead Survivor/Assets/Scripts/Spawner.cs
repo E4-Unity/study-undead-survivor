@@ -23,6 +23,9 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
+        // 게임 정지
+        if (GameManager.Get().IsPaused) return;
+
         timer += Time.deltaTime;
         level = Mathf.Min(Mathf.FloorToInt(GameManager.Get().PlayTime / 10f), m_LevelConfig.Length - 1);
 
