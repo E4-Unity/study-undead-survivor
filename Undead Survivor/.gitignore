@@ -1,5 +1,11 @@
 # Rider IDE
-/.idea/*
+/.idea/
+
+# Visual Studio
+/.vsconfig
+
+# Meta
+*.unitypackage.meta
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
