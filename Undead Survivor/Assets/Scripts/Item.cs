@@ -14,18 +14,42 @@ public class Item : MonoBehaviour
 
     Image m_Icon;
     Text m_TextLevel;
+    Text m_TextName;
+    Text m_TextDescription;
 
     void Awake()
     {
         m_Icon = GetComponentsInChildren<Image>()[1];
         m_Icon.sprite = m_Data.ItemIcon;
-        
-        m_TextLevel = GetComponentsInChildren<Text>()[0];
+
+        // TODO 계층구조의 순서를 따라가는데 리팩토링 필요할 듯
+        Text[] texts = GetComponentsInChildren<Text>();
+        m_TextLevel = texts[0];
+        m_TextName = texts[1];
+        m_TextDescription = texts[2];
+
+        // 초기화
+        m_TextName.text = m_Data.ItemName;
     }
 
-    void LateUpdate()
+    void OnEnable()
     {
         m_TextLevel.text = "Lv." + m_Level;
+
+        switch(m_Data.Type)
+        {
+            case ItemData.ItemType.Melee:
+            case ItemData.ItemType.Range:
+                m_TextDescription.text = string.Format(m_Data.ItemDescription, m_Data.Damages[m_Level] * 100, m_Data.Counts[m_Level]);
+                break;
+            case ItemData.ItemType.Glove:
+            case ItemData.ItemType.Shoe:
+                m_TextDescription.text = string.Format(m_Data.ItemDescription, m_Data.Damages[m_Level] * 100);
+                break;
+            default:
+                m_TextDescription.text = string.Format(m_Data.ItemDescription);
+                break;
+        }
     }
 
     public void OnClick()

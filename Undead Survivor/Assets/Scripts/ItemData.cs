@@ -18,7 +18,7 @@ public class ItemData : ScriptableObject
     [SerializeField] ItemType m_ItemType;
     [SerializeField] int m_ItemID;
     [SerializeField] string m_ItemName;
-    [SerializeField] string m_ItemDescription;
+    [SerializeField] [TextArea] string m_ItemDescription;
     [SerializeField] Sprite m_ItemIcon;
 
     public ItemType Type => m_ItemType;

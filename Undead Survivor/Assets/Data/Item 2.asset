@@ -15,7 +15,7 @@ MonoBehaviour:
   m_ItemType: 2
   m_ItemID: 2
   m_ItemName: "\uD14C\uD06C\uB2C8\uCEEC \uC7A5\uAC11"
-  m_ItemDescription: 
+  m_ItemDescription: "\uC5F0\uC0AC \uC18D\uB3C4 {0}% \uC99D\uAC00"
   m_ItemIcon: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   m_BaseDamage: 0
   m_BaseCount: 0
@@ -27,3 +27,4 @@ MonoBehaviour:
   - 0.75
   m_Counts: 0000000000000000000000000000000000000000
   m_Projectile: {fileID: 0}
+  m_WeaponSprite: {fileID: 0}

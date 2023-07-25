@@ -10,17 +10,21 @@ public class GameManager : MonoBehaviour
     static GameManager Instance;
     public static GameManager Get() => Instance;
     
-    // 에디터 설정
-    [Header("# Editor Config")]
+    /* 레퍼런스 */
+    [Header("# Game Object")]
     [SerializeField] Player m_Player;
     [SerializeField] PoolManager m_PoolManager;
-    
-    // 게임 상태
+    [SerializeField] LevelUp m_LevelUp_UI;
+
+    public Player GetPlayer() => m_Player;
+    public PoolManager GetPoolManager() => m_PoolManager;
+    protected LevelUp GetLevelUp() => m_LevelUp_UI;
+
+    /* 필드 */
     [Header("# Game State")]
     [SerializeField, ReadOnly] float m_PlayTime;
     [SerializeField, ReadOnly] float m_MaxPlayTime = 20f;
     
-    // 플레이어 상태
     [Header("# Player State")]
     [SerializeField] int m_MaxHealth = 100;
     [SerializeField, ReadOnly] int m_Health;
@@ -28,29 +32,22 @@ public class GameManager : MonoBehaviour
     [SerializeField, ReadOnly] int m_Kill;
     [SerializeField, ReadOnly] int m_Exp;
     [SerializeField] int[] m_NextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
-    
-    // 프로퍼티
-    public int Exp => m_Exp;
-    public int NextExp => m_NextExp[m_Level];
-    public int Level => m_Level;
-    public int Kill => m_Kill;
+
+    /* 프로퍼티 */
     public float PlayTime => m_PlayTime;
     public float MaxPlayTime => m_MaxPlayTime;
-
     public int Health
     {
         get => m_Health;
         set => m_Health = value;
     }
     public int MaxHealth => m_MaxHealth;
+    public int Level => m_Level;
+    public int Kill => m_Kill;
+    public int Exp => m_Exp;
+    public int NextExp => m_NextExp[m_Level];
 
-    // Getter
-    public Player GetPlayer() => m_Player;
-    public PoolManager GetPoolManager() => m_PoolManager;
-    public float GetPlayTime() => m_PlayTime;
-    public float GetMaxPlayTime() => m_MaxPlayTime;
-    
-    // MonoBehaviour
+    /* MonoBehaviour */
     void Awake()
     {
         Instance = this; 
@@ -59,6 +56,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         m_Health = m_MaxHealth;
+
+        //TODO 임시로 캐릭터에게 무기를 쥐어줌
+        m_LevelUp_UI.Select(0);
     }
 
     void Update()
@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         {
             m_Exp = 0;
             m_Level++;
+            m_LevelUp_UI.Show();
         }
     }
 }
