@@ -40,6 +40,8 @@ public class ItemData : ScriptableObject
 
     [Header("# Weapon")]
     [SerializeField] GameObject m_Projectile;
+    [SerializeField] Sprite m_WeaponSprite;
 
     public GameObject Projectile => m_Projectile;
+    public Sprite WeaponSprite => m_WeaponSprite;
 }

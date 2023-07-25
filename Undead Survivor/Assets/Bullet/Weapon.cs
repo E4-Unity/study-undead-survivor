@@ -88,6 +88,12 @@ public class Weapon : MonoBehaviour
                 m_Speed = 0.3f;
                 break;
         }
+
+        // Hand Set
+        // TODO OnEquip 델리게이트로 Player에서 직접 할당 예정
+        var hand = m_Player.GetHands()[(int)_data.Type];
+        hand.sprite = _data.WeaponSprite;
+        hand.gameObject.SetActive(true);
         
         m_Player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }

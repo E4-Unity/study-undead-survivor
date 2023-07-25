@@ -27,3 +27,4 @@ MonoBehaviour:
   - 2
   m_Counts: 0100000001000000020000000300000004000000
   m_Projectile: {fileID: 7703873238374379375, guid: 5fa35598d5b0be544a80a8a8810491a8, type: 3}
+  m_WeaponSprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}

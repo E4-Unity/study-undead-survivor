@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ItemType: 0
   m_ItemID: 0
-  m_ItemName: 
+  m_ItemName: "\uC0BD"
   m_ItemDescription: 
   m_ItemIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  m_BaseDamage: 4.5
+  m_BaseDamage: 4
   m_BaseCount: 3
   m_Damages:
   - 0.5
@@ -27,3 +27,4 @@ MonoBehaviour:
   - 3
   m_Counts: 0100000001000000010000000100000002000000
   m_Projectile: {fileID: 6652638951289049743, guid: dfdbc4fd1a80db24793e4ff10b7234c4, type: 3}
+  m_WeaponSprite: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
