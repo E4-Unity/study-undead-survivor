@@ -147,5 +147,7 @@ public class Weapon : MonoBehaviour
 
         // Bullet 활성화
         bullet.SetActive(true);
+        
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.Range);
     }
 }

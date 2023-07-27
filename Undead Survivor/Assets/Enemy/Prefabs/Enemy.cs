@@ -118,6 +118,10 @@ public class Enemy : MonoBehaviour
         Health -= _other.GetComponent<Bullet>().Damage;
         m_Animator.SetTrigger("Hit");
         StartCoroutine(KnockBack());
+        
+        if (GameManager.Get().IsPaused)
+            return;
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.Hit);
     }
 
     IEnumerator KnockBack()
@@ -136,6 +140,11 @@ public class Enemy : MonoBehaviour
         m_SortingGroup.sortingLayerName = "Dead";
         
         GameManager.Get().GetExp();
+
+        // 게임 종료 후 Enemy Cleaner로 발생하는 죽음은 무시
+        if (GameManager.Get().IsPaused)
+            return;
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.Dead);
     }
 
     void Revive()

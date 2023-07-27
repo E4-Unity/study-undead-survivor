@@ -52,12 +52,18 @@ public class LevelUp : MonoBehaviour
         Next();
         m_RectTransform.localScale = Vector3.one;
         GameManager.Get().PauseGame();
+        
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.LevelUp);
+        AudioManager.Get().EffectBgm(true);
     }
 
     public void Hide()
     {
         m_RectTransform.localScale = Vector3.zero;
         GameManager.Get().ResumeGame();
+        
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.Get().EffectBgm(false);
     }
 
     public void Select(int _index)

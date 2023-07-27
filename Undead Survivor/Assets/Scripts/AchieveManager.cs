@@ -16,7 +16,7 @@ public class AchieveManager : MonoBehaviour
     [SerializeField] GameObject[] m_LockCharacters;
     [SerializeField] GameObject[] m_UnlockCharacters;
     [SerializeField] GameObject m_Notice_UI;
-    
+
     Achieve[] m_Achieves;
     
     /* 버퍼 */
@@ -77,6 +77,7 @@ public class AchieveManager : MonoBehaviour
     IEnumerator NoticeRoutine()
     {
         m_Notice_UI.SetActive(true);
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.LevelUp);
         
         yield return waitForSecondsRealtime;
         

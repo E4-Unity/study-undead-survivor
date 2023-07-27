@@ -79,6 +79,9 @@ public class GameManager : MonoBehaviour
         m_LevelUp_UI.Select(m_PlayerID % 2);
 
         ResumeGame();
+        
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.Get().PlayBgm(true);
     }
 
     public void GameOver()
@@ -96,6 +99,9 @@ public class GameManager : MonoBehaviour
         m_GameResult_UI.gameObject.SetActive(true);
         m_GameResult_UI.Lose();
         PauseGame();
+        
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.Lose);
+        AudioManager.Get().PlayBgm(false);
     }
     
     public void GameVictory()
@@ -114,6 +120,9 @@ public class GameManager : MonoBehaviour
         m_GameResult_UI.gameObject.SetActive(true);
         m_GameResult_UI.Win();
         PauseGame();
+        
+        AudioManager.Get().PlaySfx(AudioManager.Sfx.Win);
+        AudioManager.Get().PlayBgm(false);
     }
 
     public void GameRetry()

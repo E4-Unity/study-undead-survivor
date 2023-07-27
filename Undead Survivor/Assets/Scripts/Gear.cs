@@ -54,7 +54,7 @@ public class Gear : MonoBehaviour
                     break;
                 // 원거리 무기
                 default:
-                    float rate = 0.5f * Character.WeaponRate;
+                    float rate = 0.3f * Character.WeaponRate;
                     weapon.Speed = rate * (1f - m_Rate);
                     break;
             }
