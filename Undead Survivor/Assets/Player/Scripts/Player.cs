@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D.Animation;
 
 public class Player : MonoBehaviour
 {
@@ -11,21 +12,25 @@ public class Player : MonoBehaviour
     Rigidbody2D m_Rigidbody;
     SpriteRenderer m_Renderer;
     Animator m_Animator;
+    SpriteLibrary m_SpriteLibrary;
 
     protected Rigidbody2D GetRigidbody() => m_Rigidbody;
     protected SpriteRenderer GetSpriteRenderer() => m_Renderer;
     protected Animator GetAnimator() => m_Animator;
+    protected SpriteLibrary GetSpriteLibrary() => m_SpriteLibrary;
 
     /* 레퍼런스 */
-    [Header("Reference")]
+    [Header("[Reference]")]
     [SerializeField] SpriteRenderer[] m_Hands;
     [SerializeField] GameObject[] m_ObjectsToDeactivate;
 
     public SpriteRenderer[] GetHands() => m_Hands;
 
     /* 필드 */
-    [Header("Initialization")]
+    [Header("[Initialization]")]
     [SerializeField] float m_Speed = 3f;
+
+    [SerializeField] SpriteLibraryAsset[] m_SpriteLibraryAssets;
 
     // 버퍼
     Vector2 inputValue;
@@ -80,6 +85,13 @@ public class Player : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Renderer = GetComponent<SpriteRenderer>();
         m_Animator = GetComponent<Animator>();
+        m_SpriteLibrary = GetComponent<SpriteLibrary>();
+    }
+
+    void OnEnable()
+    {
+        m_Speed *= Character.Speed;
+        m_SpriteLibrary.spriteLibraryAsset = m_SpriteLibraryAssets[GameManager.Get().PlayerID];
     }
 
     void Start()

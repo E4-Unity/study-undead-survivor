@@ -49,11 +49,13 @@ public class Gear : MonoBehaviour
             {
                 // 근접 무기
                 case 0:
-                    weapon.Speed = 150 + (150 * m_Rate);
+                    float speed = 150 * Character.WeaponSpeed;
+                    weapon.Speed = speed + (speed * m_Rate);
                     break;
                 // 원거리 무기
                 default:
-                    weapon.Speed = 0.5f * (1f - m_Rate);
+                    float rate = 0.5f * Character.WeaponRate;
+                    weapon.Speed = rate * (1f - m_Rate);
                     break;
             }
         }
@@ -61,7 +63,7 @@ public class Gear : MonoBehaviour
 
     void SpeedUp()
     {
-        float speed = 3f;
+        float speed = 3f * Character.Speed;
         GameManager.Get().GetPlayer().Speed = speed + speed * m_Rate;
     }
 }

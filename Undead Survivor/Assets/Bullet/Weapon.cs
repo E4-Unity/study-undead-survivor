@@ -43,11 +43,11 @@ public class Weapon : MonoBehaviour
         switch (m_WeaponID)
         {
             case 0:
-                transform.Rotate(m_Speed * Time.deltaTime * Vector3.back);
+                transform.Rotate(m_Speed * Character.WeaponSpeed * Time.deltaTime * Vector3.back);
                 break;
             default:
                 m_Timer += Time.deltaTime;
-                if (m_Timer > m_Speed)
+                if (m_Timer > m_Speed * Character.WeaponRate)
                 {
                     m_Timer = 0;
                     Fire();
@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour
 
     public void LevelUp(int _damage, int _count)
     {
-        m_Damage = _damage;
+        m_Damage = _damage * (int)Character.Damage;
         m_Count += _count;
         
         if(m_WeaponID == 0)
@@ -77,8 +77,8 @@ public class Weapon : MonoBehaviour
         
         // Property Set
         m_WeaponID = _data.ItemID;
-        m_Damage = _data.BaseDamage;
-        m_Count = _data.BaseCount;
+        m_Damage = _data.BaseDamage * (int)Character.Damage;
+        m_Count = _data.BaseCount + Character.Count;
         m_PrefabID = GameManager.Get().GetPoolManager().GetPrefabID(_data.Projectile);
         
         switch (m_WeaponID)

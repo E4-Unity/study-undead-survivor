@@ -1446,6 +1446,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5843452604872781841, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_SpriteLibraryAssets.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843452604872781841, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_ObjectsToDeactivate.Array.data[0]
       value: 
       objectReference: {fileID: 892048031}
@@ -1457,6 +1461,22 @@ PrefabInstance:
       propertyPath: m_ObjectsToDeactivate.Array.data[2]
       value: 
       objectReference: {fileID: 2018962193}
+    - target: {fileID: 5843452604872781841, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_SpriteLibraryAssets.Array.data[0]
+      value: 
+      objectReference: {fileID: 7108339969198208228, guid: 5ee4ed22fb0abc34e88e9d71224272be, type: 3}
+    - target: {fileID: 5843452604872781841, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_SpriteLibraryAssets.Array.data[1]
+      value: 
+      objectReference: {fileID: 7108339969198208228, guid: 3dee150f9ffc02d46b5c718630d97f0d, type: 3}
+    - target: {fileID: 5843452604872781841, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_SpriteLibraryAssets.Array.data[2]
+      value: 
+      objectReference: {fileID: 7108339969198208228, guid: 66972d02c239ddf4a820038158d26808, type: 3}
+    - target: {fileID: 5843452604872781841, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
+      propertyPath: m_SpriteLibraryAssets.Array.data[3]
+      value: 
+      objectReference: {fileID: 7108339969198208228, guid: 6a3640c1b5282da498141c855ce63d81, type: 3}
     - target: {fileID: 5843452604872781844, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1519,7 +1539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5843452604872781850, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75edffb3f4ed7fe47950b22c1cf50529, type: 3}
@@ -7658,11 +7678,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1586341992}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GameStart
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -18071,6 +18091,7 @@ MonoBehaviour:
   m_IsPaused: 0
   m_PlayTime: 0
   m_MaxPlayTime: 20
+  m_PlayerID: 0
   m_MaxHealth: 100
   m_Health: 0
   m_Level: 0
@@ -18164,7 +18185,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC774\uB3D9\uC18D\uB3C4 10% \uC99D\uAC00"
+  m_Text: "\uC5F0\uC0AC\uC18D\uB3C4 10% \uC99D\uAC00"
 --- !u!222 &1605177113
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18453,7 +18474,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1586341992}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GameStart
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

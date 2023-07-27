@@ -28,8 +28,9 @@ public class GameManager : MonoBehaviour
     [SerializeField, ReadOnly] bool m_IsPaused = false;
     [SerializeField, ReadOnly] float m_PlayTime;
     [SerializeField, ReadOnly] float m_MaxPlayTime = 20f;
-    
-    [Header("# Player State")]
+
+    [Header("# Player State")] 
+    [SerializeField] int m_PlayerID;
     [SerializeField] float m_MaxHealth = 100;
     [SerializeField, ReadOnly] float m_Health;
     [SerializeField, ReadOnly] int m_Level;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     public bool IsPaused => m_IsPaused;
     public float PlayTime => m_PlayTime;
     public float MaxPlayTime => m_MaxPlayTime;
+    public int PlayerID => m_PlayerID;
     public float Health
     {
         get => m_Health;
@@ -66,12 +68,15 @@ public class GameManager : MonoBehaviour
     }
     
     /* API */
-    public void GameStart()
+    public void GameStart(int _characterID)
     {
+        m_PlayerID = _characterID;
+        
         m_Health = m_MaxHealth;
 
+        m_Player.gameObject.SetActive(true);
         //TODO 임시로 캐릭터에게 무기를 쥐어줌
-        m_LevelUp_UI.Select(0);
+        m_LevelUp_UI.Select(m_PlayerID % 2);
 
         ResumeGame();
     }
