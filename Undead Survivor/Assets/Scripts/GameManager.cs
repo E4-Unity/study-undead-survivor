@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] LevelUp m_LevelUp_UI;
     [SerializeField] Result m_GameResult_UI;
     [SerializeField] GameObject m_EnemyCleaner;
+    [SerializeField] Transform m_Joy_UI;
 
     public Player GetPlayer() => m_Player;
     public PoolManager GetPoolManager() => m_PoolManager;
@@ -59,15 +60,25 @@ public class GameManager : MonoBehaviour
     {
         m_IsPaused = true;
         Time.timeScale = 0;
+        m_Joy_UI.localScale = Vector3.zero;
     }
 
     public void ResumeGame()
     {
         m_IsPaused = false;
         Time.timeScale = 1;
+        m_Joy_UI.localScale = Vector3.one;
     }
     
     /* API */
+    public void GameQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
+    }
     public void GameStart(int _characterID)
     {
         m_PlayerID = _characterID;
@@ -150,6 +161,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        Application.targetFrameRate = 60;
         
         //TODO 임시
         m_IsPaused = true;
