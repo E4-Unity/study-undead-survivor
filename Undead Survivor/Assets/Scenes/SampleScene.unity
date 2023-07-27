@@ -2386,6 +2386,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2461,7 +2462,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7.6190476
+  orthographic size: 7.9166665
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2549,6 +2550,16 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!165 &519420035
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 0
+  m_CutoffFrequency: 5000
+  m_HighpassResonanceQ: 1
 --- !u!1 &520389704
 GameObject:
   m_ObjectHideFlags: 0
@@ -19033,7 +19044,7 @@ MonoBehaviour:
   m_Level: 0
   m_Kill: 0
   m_Exp: 0
-  m_NextExp: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+  m_NextExp: 03000000050000000a0000006400000096000000d20000001801000068010000c201000058020000
 --- !u!1 &1605177109
 GameObject:
   m_ObjectHideFlags: 0
@@ -19712,7 +19723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BgmPlayer: {fileID: 0}
   m_SfxPlayers: []
-  m_BgmClip: {fileID: 0}
+  m_BgmEffect: {fileID: 0}
+  m_BgmClip: {fileID: 8300000, guid: 4559935c00ef8e94b846e2e03e39f0d0, type: 3}
   m_BgmVolume: 0.2
   m_SfxClips:
   - {fileID: 8300000, guid: 291608b8d286e2a4580ff36324455ce2, type: 3}

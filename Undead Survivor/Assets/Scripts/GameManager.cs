@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     [Header("# Game State")]
     [SerializeField, ReadOnly] bool m_IsPaused = false;
     [SerializeField, ReadOnly] float m_PlayTime;
-    [SerializeField, ReadOnly] float m_MaxPlayTime = 20f;
+    [SerializeField] float m_MaxPlayTime = 20f;
 
     [Header("# Player State")] 
     [SerializeField] int m_PlayerID;

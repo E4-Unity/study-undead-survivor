@@ -123,7 +123,7 @@ public class Weapon : MonoBehaviour
             bullet.transform.Translate(bullet.transform.up * 1.5f, Space.World);
             
             // Bullet 설정
-            bullet.GetComponent<Bullet>().Init(m_Damage, -1, Vector3.zero); // -1은 무한 관통
+            bullet.GetComponent<Bullet>().Init(m_Damage, -100, Vector3.zero); // -1은 무한 관통
             
             // Bullet 활성화
             bullet.SetActive(true); // 나중에 IObjectPool에 Finish 추가 예정

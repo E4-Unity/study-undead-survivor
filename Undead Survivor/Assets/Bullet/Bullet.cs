@@ -26,19 +26,19 @@ public class Bullet : MonoBehaviour
 
     void OnEnable()
     {
-        if (m_Penetration == -1) return;
+        if (m_Penetration < 0) return;
         m_Rigidbody.velocity = m_Velocity;
     }
 
     void OnTriggerEnter2D(Collider2D _other)
     {
         // 원거리 무기
-        if (!_other.CompareTag("Enemy") || m_Penetration == -1) return;
+        if (!_other.CompareTag("Enemy") || m_Penetration == -100) return;
         
         // 관통 계산
         m_Penetration--;
 
-        if (m_Penetration == -1)
+        if (m_Penetration < 0)
         {
             if(gameObject.activeSelf)
                 GameManager.Get().GetPoolManager().GetPool(gameObject.GetComponent<PoolTracker>().PrefabID).Release(gameObject);
@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
         m_Penetration = _penetration;
         
         // 원거리 무기
-        if (_penetration > -1)
+        if (_penetration >= 0)
         {
             m_Velocity = _velocity * 15;
         }
