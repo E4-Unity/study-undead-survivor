@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public int Level => m_Level;
     public int Kill => m_Kill;
     public int Exp => m_Exp;
-    public int NextExp => m_NextExp[m_Level];
+    public int NextExp => m_NextExp[Mathf.Min(m_Level, m_NextExp.Length - 1)];
 
     /* 메서드 */
     public void PauseGame()
@@ -65,10 +65,10 @@ public class GameManager : MonoBehaviour
     // Player
     public void GetExp()
     {
-        m_Exp++;
+        m_Exp++; 
         m_Kill++;
 
-        if (m_Exp == m_NextExp[m_Level])
+        if (m_Exp == NextExp)
         {
             m_Exp = 0;
             m_Level++;

@@ -16849,6 +16849,7 @@ MonoBehaviour:
   m_Player: {fileID: 197275223}
   m_PoolManager: {fileID: 1285905443}
   m_LevelUp_UI: {fileID: 1974001422}
+  m_IsPaused: 0
   m_PlayTime: 0
   m_MaxPlayTime: 20
   m_MaxHealth: 100
@@ -16856,7 +16857,7 @@ MonoBehaviour:
   m_Level: 0
   m_Kill: 0
   m_Exp: 0
-  m_NextExp: 03000000050000000a0000006400000096000000d20000001801000068010000c201000058020000
+  m_NextExp: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
 --- !u!1 &1663154405
 GameObject:
   m_ObjectHideFlags: 0

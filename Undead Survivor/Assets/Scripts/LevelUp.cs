@@ -11,8 +11,45 @@ public class LevelUp : MonoBehaviour
     protected RectTransform GetRectTransform() => m_RectTransform;
 
     /* 메서드 */
+    void Next()
+    {
+        // 1. 모든 아이템 비활성화
+        foreach (var item in m_Items)
+        {
+            item.gameObject.SetActive(false);
+        }
+        
+        // 2. 그 중에서 랜덤하게 3개의 아이템만 활성화
+        int[] ran = new int[3];
+        while (true)
+        {
+            ran[0] = Random.Range(0, m_Items.Length);
+            ran[1] = Random.Range(0, m_Items.Length);
+            ran[2] = Random.Range(0, m_Items.Length);
+
+            if (ran[0] != ran[1] && ran[0] != ran[2] && ran[1] != ran[2]) 
+                break;
+        }
+
+        for (int i = 0; i < ran.Length; i++)
+        {
+            Item ranItem = m_Items[ran[i]];
+            
+            // 3. 만렙 아이템의 경우는 소비 아이템으로 대체
+            if (ranItem.Level == ranItem.Data.Damages.Length)
+            {
+                m_Items[4].gameObject.SetActive(true);
+            }
+            else
+            {
+                ranItem.gameObject.SetActive(true);
+            }
+        }
+    }
+    /* API */
     public void Show()
     {
+        Next();
         m_RectTransform.localScale = Vector3.one;
         GameManager.Get().PauseGame();
     }

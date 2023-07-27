@@ -7,15 +7,21 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
+    /* 레퍼런스 */
+    Image m_Icon;
+    Text m_TextLevel;
+    Text m_TextName;
+    Text m_TextDescription;
+    
+    /* 필드 */
     [SerializeField] ItemData m_Data;
     [SerializeField] int m_Level;
     [SerializeField, ReadOnly] Weapon m_Weapon;
     [SerializeField, ReadOnly] Gear m_Gear;
 
-    Image m_Icon;
-    Text m_TextLevel;
-    Text m_TextName;
-    Text m_TextDescription;
+    /* 프로퍼티 */
+    public int Level => m_Level;
+    public ItemData Data => m_Data;
 
     void Awake()
     {
