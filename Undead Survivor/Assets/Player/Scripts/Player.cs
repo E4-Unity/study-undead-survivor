@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     /* 레퍼런스 */
     [Header("Reference")]
     [SerializeField] SpriteRenderer[] m_Hands;
+    [SerializeField] GameObject[] m_ObjectsToDeactivate;
 
     public SpriteRenderer[] GetHands() => m_Hands;
 
@@ -117,6 +118,25 @@ public class Player : MonoBehaviour
         foreach(var hand in m_Hands)
         {
             FlipHand(hand);
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D _other)
+    {
+        if (GameManager.Get().IsPaused) return;
+
+        GameManager.Get().Health -= Time.deltaTime * 10;
+
+        // Dead
+        if (GameManager.Get().Health < 0)
+        {
+            foreach (var obj in m_ObjectsToDeactivate)
+            {
+                obj.SetActive(false);
+            }
+            
+            m_Animator.SetTrigger("Dead");
+            GameManager.Get().GameOver();
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player m_Player;
     [SerializeField] PoolManager m_PoolManager;
     [SerializeField] LevelUp m_LevelUp_UI;
+    [SerializeField] Result m_GameResult_UI;
+    [SerializeField] GameObject m_EnemyCleaner;
 
     public Player GetPlayer() => m_Player;
     public PoolManager GetPoolManager() => m_PoolManager;
@@ -27,8 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, ReadOnly] float m_MaxPlayTime = 20f;
     
     [Header("# Player State")]
-    [SerializeField] int m_MaxHealth = 100;
-    [SerializeField, ReadOnly] int m_Health;
+    [SerializeField] float m_MaxHealth = 100;
+    [SerializeField, ReadOnly] float m_Health;
     [SerializeField, ReadOnly] int m_Level;
     [SerializeField, ReadOnly] int m_Kill;
     [SerializeField, ReadOnly] int m_Exp;
@@ -38,12 +41,12 @@ public class GameManager : MonoBehaviour
     public bool IsPaused => m_IsPaused;
     public float PlayTime => m_PlayTime;
     public float MaxPlayTime => m_MaxPlayTime;
-    public int Health
+    public float Health
     {
         get => m_Health;
         set => m_Health = value;
     }
-    public int MaxHealth => m_MaxHealth;
+    public float MaxHealth => m_MaxHealth;
     public int Level => m_Level;
     public int Kill => m_Kill;
     public int Exp => m_Exp;
@@ -61,10 +64,63 @@ public class GameManager : MonoBehaviour
         m_IsPaused = false;
         Time.timeScale = 1;
     }
+    
+    /* API */
+    public void GameStart()
+    {
+        m_Health = m_MaxHealth;
+
+        //TODO 임시로 캐릭터에게 무기를 쥐어줌
+        m_LevelUp_UI.Select(0);
+
+        ResumeGame();
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+    }
+
+    // Dead 애니메이션이 재생되고 난 뒤에 게임이 멈춰야 하므로 딜레이를 준다.
+    IEnumerator GameOverRoutine()
+    {
+        m_IsPaused = true;
+        
+        yield return new WaitForSeconds(0.5f);
+        
+        m_GameResult_UI.gameObject.SetActive(true);
+        m_GameResult_UI.Lose();
+        PauseGame();
+    }
+    
+    public void GameVictory()
+    {
+        StartCoroutine(GameVictoryRoutine());
+    }
+
+    // Dead 애니메이션이 재생되고 난 뒤에 게임이 멈춰야 하므로 딜레이를 준다.
+    IEnumerator GameVictoryRoutine()
+    {
+        m_IsPaused = true;
+        m_EnemyCleaner.SetActive(true);
+        
+        yield return new WaitForSeconds(0.5f);
+        
+        m_GameResult_UI.gameObject.SetActive(true);
+        m_GameResult_UI.Win();
+        PauseGame();
+    }
+
+    public void GameRetry()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     // Player
     public void GetExp()
     {
+        if (m_IsPaused) return;
+        
         m_Exp++; 
         m_Kill++;
 
@@ -79,15 +135,10 @@ public class GameManager : MonoBehaviour
     /* MonoBehaviour */
     void Awake()
     {
-        Instance = this; 
-    }
-
-    void Start()
-    {
-        m_Health = m_MaxHealth;
-
-        //TODO 임시로 캐릭터에게 무기를 쥐어줌
-        m_LevelUp_UI.Select(0);
+        Instance = this;
+        
+        //TODO 임시
+        m_IsPaused = true;
     }
 
     void Update()
@@ -100,6 +151,7 @@ public class GameManager : MonoBehaviour
         if (m_PlayTime > m_MaxPlayTime)
         {
             m_PlayTime = m_MaxPlayTime;
+            GameVictory();
         }
     }
 }
